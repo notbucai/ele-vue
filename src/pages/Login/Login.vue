@@ -18,7 +18,7 @@
                     温馨提示：未注册饿了么帐号的手机号，登录时将自动注册，且代表您已同意 《用户服务协议》
                 </section>
                 <mt-button class="login-btn" type="primary" @click="login">登陆</mt-button>
-            </mt-tab-container-item>
+            </mt-tab-container-item> 
             <mt-tab-container-item id="password">
                 <section><input name="tell" v-model="tell" type="number" placeholder="手机号"></section>
                 <section class="get-code">
