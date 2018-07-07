@@ -1,27 +1,31 @@
 <template>
-    <div class="msite">
-        <mt-header title="九江职业技术学院-十号楼 222">
-            <router-link to="/" slot="left">
-                <mt-button class="iconfont  icon-sousuo"></mt-button>
-            </router-link>
-            <mt-button slot="right">登陆 | 注册</mt-button>
-        </mt-header>
+  <div class="msite">
+    <mt-header :title="address.name">
+      <router-link to="/" slot="left">
+        <mt-button class="iconfont  icon-sousuo"></mt-button>
+      </router-link>
+      <mt-button slot="right">登陆 | 注册</mt-button>
+    </mt-header>
 
-        <Nav :navs="navs" />
+    <Nav :navs="navs" />
 
-        <div class="shoplist-title">推荐商家</div>
-        <Shoplist :shoplist="shoplist" />
-    </div>
+    <div class="shoplist-title">推荐商家</div>
+    <Shoplist :shoplist="shoplist" />
+  </div>
 </template>
 
 <script>
 import Nav from "./components/Nav.vue";
 import Shoplist from "./components/Shoplist.vue";
+import { mapState } from "vuex";
 export default {
   name: "msite",
   components: {
     Nav,
     Shoplist
+  },
+  computed: {
+    ...mapState(["address"])
   },
   data() {
     return {

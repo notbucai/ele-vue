@@ -1,17 +1,20 @@
 <template>
   <div id="app">
     <router-view></router-view>
-    <FootGuide v-show="$route.meta.showFooter"/>
+    <FootGuide v-show="$route.meta.showFooter" />
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import FootGuide from "./components/FootGuide/FootGuide.vue";
+
 export default {
   name: "App",
   components: { FootGuide },
-  mounted() {},
+  mounted() {
+    this.$store.dispatch('getAddress');
+  },
   data() {
     return {
       content: ""

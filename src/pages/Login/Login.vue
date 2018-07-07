@@ -19,7 +19,7 @@
                 </section>
                 <mt-button class="login-btn" type="primary" @click="login">登陆</mt-button>
             </mt-tab-container-item> 
-            <mt-tab-container-item id="password">
+            <mt-tab-container-item id="password"> 
                 <section><input name="tell" v-model="tell" type="number" placeholder="手机号"></section>
                 <section class="get-code">
                     <a href="javascript:;">获取验证码</a>
