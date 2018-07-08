@@ -7,7 +7,7 @@
       <mt-button slot="right">登陆 | 注册</mt-button>
     </mt-header>
 
-    <Nav :navs="navs" />
+    <Nav/>
 
     <div class="shoplist-title">推荐商家</div>
     <Shoplist :shoplist="shoplist" />
@@ -24,73 +24,17 @@ export default {
     Nav,
     Shoplist
   },
+  mounted() {
+    this.$store.dispatch("getAddress");
+    this.$store.dispatch("getNavigation");
+  },
   computed: {
     ...mapState(["address"])
   },
   data() {
     return {
       msg: "Welcome to Your Vue.js App",
-      navs: [
-        [
-          {
-            img: require(".\\images\\6f2631288a44ec177204e05cbcb93jpeg.jpeg"),
-            title: "标题",
-            alt: "图片介绍"
-          },
-          {
-            img: require(".\\images\\60ac33f023d9074e13cd78f9b5964jpeg.jpeg"),
-            title: "标题",
-            alt: "图片介绍"
-          },
-          {
-            img: require(".\\images\\0184f5b3fa72f295fc01864734218jpeg.jpeg"),
-            title: "标题",
-            alt: "图片介绍"
-          },
-          {
-            img: require(".\\images\\60ac33f023d9074e13cd78f9b5964jpeg.jpeg"),
-            title: "标题",
-            alt: "图片介绍"
-          },
-          {
-            img: require(".\\images\\60ac33f023d9074e13cd78f9b5964jpeg.jpeg"),
-            title: "标题",
-            alt: "图片介绍"
-          },
-          {
-            img: require(".\\images\\60ac33f023d9074e13cd78f9b5964jpeg.jpeg"),
-            title: "标题",
-            alt: "图片介绍"
-          },
-          {
-            img: require(".\\images\\60ac33f023d9074e13cd78f9b5964jpeg.jpeg"),
-            title: "标题",
-            alt: "图片介绍"
-          },
-          {
-            img: require(".\\images\\60ac33f023d9074e13cd78f9b5964jpeg.jpeg"),
-            title: "标题",
-            alt: "图片介绍"
-          },
-          {
-            img: require(".\\images\\60ac33f023d9074e13cd78f9b5964jpeg.jpeg"),
-            title: "标题",
-            alt: "图片介绍"
-          },
-          {
-            img: require(".\\images\\60ac33f023d9074e13cd78f9b5964jpeg.jpeg"),
-            title: "标题",
-            alt: "图片介绍"
-          }
-        ],
-        [
-          {
-            img: require(".\\images\\60ac33f023d9074e13cd78f9b5964jpeg.jpeg"),
-            title: "标题",
-            alt: "图片介绍"
-          }
-        ]
-      ],
+      
       shoplist: [
         {
           img: require(".\\images\\60ac33f023d9074e13cd78f9b5964jpeg.jpeg"),

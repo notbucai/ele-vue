@@ -5,7 +5,10 @@ import {
 } from "./mutation-type";
 
 export default {
-    [RECEIVE_ADDRESS](state,{address}){
+    [RECEIVE_ADDRESS](state, { address }) {
         state.address = address;
+    },
+    [RECEIVE_NAVIGATION](state, { navigation }) {
+        state.navigation = navigation;
     }
 }

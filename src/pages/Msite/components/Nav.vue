@@ -1,28 +1,28 @@
 <template>
-    <swiper :options="swiperOption" ref="mySwiper">
-        <!-- slides -->
-        <swiper-slide v-for="(nav, index) in navs" :key="index">
-            <div class="nav">
-                <a v-for="(item, index) in nav" :key="index" href="javascript:" class="nav-item">
-                    <div class="container">
-                        <img :src="item.img" :alt="item.alt" >
-                    </div>
-                    <span>{{item.title}}</span>
-                </a>
-            </div>
-        </swiper-slide>
+  <swiper :options="swiperOption" ref="mySwiper">
+    <!-- slides -->
+    <swiper-slide v-for="(navs, index) in navigation" :key="index">
+      <div class="nav">
 
-        <!-- Optional controls -->
-        <div class="swiper-pagination" slot="pagination"></div>
-    </swiper>
+        <router-link v-for="nav in navs" :key="nav.id" :to="nav.to" class="nav-item">
+          <div class="container">
+            <img :src="nav.img_path" :alt="nav.title">
+          </div>
+          <span>{{nav.title}}</span>
+        </router-link>
+      </div>
+    </swiper-slide>
+
+    <!-- Optional controls -->
+    <div class="swiper-pagination" slot="pagination"></div>
+  </swiper>
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "profile",
-  props: {
-    navs: Array
-  },
+  props: {},
   data() {
     return {
       msg: "Welcome to Your Vue.js App",
@@ -35,6 +35,9 @@ export default {
         }
       }
     };
+  },
+  computed: {
+    ...mapState(["navigation"])
   }
 };
 </script>

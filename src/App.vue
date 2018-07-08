@@ -12,9 +12,7 @@ import FootGuide from "./components/FootGuide/FootGuide.vue";
 export default {
   name: "App",
   components: { FootGuide },
-  mounted() {
-    this.$store.dispatch('getAddress');
-  },
+  
   data() {
     return {
       content: ""

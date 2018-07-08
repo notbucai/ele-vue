@@ -51,15 +51,32 @@
                 </div>
             </div>
             <div class="item-sale">
-                <p>
-                    <i style="background:#f07373;color:#fff;">减</i>
-                    <span class="left">减免</span>
-                    <span class="right">活动数量</span>
-                </p>
-                <p>
+                <section class="sale">
+                    <i style="background:#f07373;">减</i>
+                    <span>活动数量</span>
+                </section>
+                <section class="sale">
+                    <i style="background:#f07373;">减</i>
+                    <span>活动数量</span>
+                </section>
+
+                <section class="sale" :style="{display:display}">
+                    <i style="background:#f07373;">减</i>
+                    <span>活动数量</span>
+                </section>
+                <section class="sale" :style="{display:display}">
+                    <i style="background:#f07373;">减</i>
+                    <span>活动数量</span>
+                </section>
+                <section class="sale" :style="{display:display}">
                     <i style="background:#70bc46;">首</i>
-                    <span class="left">优惠 减免</span>
-                </p>
+                    <span>优惠 减免</span>
+                </section>
+
+                <div class="sale-activity">
+                    <span>19个活动</span>
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBmaWxsPSIjOTk5IiBkPSJNNC41NzcgNS40MjNjLjc5Ljc3IDIuMDczLjc2NyAyLjg1NyAwbDQuMTItNC4wMjZDMTIuMzQ1LjYyNSAxMi4wOSAwIDEwLjk4NSAwSDEuMDI3Qy0uMDc3IDAtLjMzLjYzLjQ1NyAxLjM5N2w0LjEyIDQuMDI2eiIgZmlsbC1ydWxlPSJldmVub2RkIi8+PC9zdmc+" class="">
+                </div>
             </div>
         </section>
 
@@ -69,11 +86,12 @@
 <script>
 export default {
   props: {
-      shoplist:Array
+    shoplist: Array
   },
   data() {
     return {
-      msg: "Welcome to Your Vue.js App"
+      msg: "Welcome to Your Vue.js App",
+      display:"none"
     };
   }
 };
@@ -96,11 +114,12 @@ export default {
     }
     .right {
       float: right;
+      margin-left: 10px;
     }
 
     p {
       color: #666;
-      font-size: 8px;
+      font-size: 10px;
     }
     .container {
       display: flex;
@@ -135,13 +154,28 @@ export default {
     }
     .item-sale {
       padding-left: 72px;
-      p {
+      position: relative;
+      .sale {
         display: flex;
         margin-bottom: 2px;
+        color: #666;
+        font-size: 10px;
+        span {
+          margin-left: 4px;
+        }
         i {
           color: #fff;
           line-height: normal;
-          border-radius: 2px;
+          border-radius: 1px;
+        }
+      }
+      .sale-activity {
+        position: absolute;
+        right: 0;
+        top: 0;
+        color: #999;
+        span {
+          font-size: 8px;
         }
       }
     }
