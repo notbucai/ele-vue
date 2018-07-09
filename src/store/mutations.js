@@ -10,5 +10,8 @@ export default {
     },
     [RECEIVE_NAVIGATION](state, { navigation }) {
         state.navigation = navigation;
+    },
+    [RECEIVE_SHOPLISTS](state, { shoplists }) {
+        state.shoplists = shoplists;
     }
 }

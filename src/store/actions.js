@@ -4,7 +4,11 @@ import {
     RECEIVE_NAVIGATION
 } from "./mutation-type";
 
-import { getAddress, getNavigation } from "../api/";
+import {
+    getAddress,
+    getNavigation,
+    getShoplists
+} from "../api/";
 export default {
     async  getAddress({ commit, state }) {
         console.log(state);
@@ -24,15 +28,25 @@ export default {
 
         result.forEach(element => {
             if (i % 10 == 0) {
-                navigation.push([]);	
-                  if(i!==0){
-                      j++;
-                  }
-              }
-              navigation[j].push(element);
-              i++;
+                navigation.push([]);
+                if (i !== 0) {
+                    j++;
+                }
+            }
+            navigation[j].push(element);
+            i++;
         });
 
         commit(RECEIVE_NAVIGATION, { navigation });
+    },
+    async  getShoplists({ commit, state }) {
+        console.log(state);
+
+        let { longitude, latitude } = state;
+        let result = await getShoplists(longitude + "," + latitude);
+        const shoplists = result.items;
+       
+
+        commit(RECEIVE_SHOPLISTS, { shoplists });
     }
 }

@@ -10,53 +10,36 @@
     <Nav/>
 
     <div class="shoplist-title">推荐商家</div>
-    <Shoplist :shoplist="shoplist" />
+
+    <section class="shoplist">
+      <List v-for="(shop) in shoplists" :restaurant="shop.restaurant" :key="shop.id"/>
+
+    </section>
+
   </div>
 </template>
 
 <script>
 import Nav from "./components/Nav.vue";
-import Shoplist from "./components/Shoplist.vue";
+import List from "./components/List.vue";
 import { mapState } from "vuex";
 export default {
   name: "msite",
   components: {
     Nav,
-    Shoplist
+    List
   },
   mounted() {
     this.$store.dispatch("getAddress");
     this.$store.dispatch("getNavigation");
+    this.$store.dispatch("getShoplists");
   },
   computed: {
-    ...mapState(["address"])
+    ...mapState(["address","shoplists"])
   },
   data() {
     return {
-      msg: "Welcome to Your Vue.js App",
-      
-      shoplist: [
-        {
-          img: require(".\\images\\60ac33f023d9074e13cd78f9b5964jpeg.jpeg"),
-          title: "标题"
-        },
-        {
-          img: require(".\\images\\60ac33f023d9074e13cd78f9b5964jpeg.jpeg"),
-          title: "标题"
-        },
-        {
-          img: require(".\\images\\60ac33f023d9074e13cd78f9b5964jpeg.jpeg"),
-          title: "标题"
-        },
-        {
-          img: require(".\\images\\60ac33f023d9074e13cd78f9b5964jpeg.jpeg"),
-          title: "标题"
-        },
-        {
-          img: require(".\\images\\60ac33f023d9074e13cd78f9b5964jpeg.jpeg"),
-          title: "标题"
-        }
-      ]
+      msg: "Welcome to Your Vue.js App"
     };
   }
 };
@@ -88,5 +71,9 @@ export default {
     margin-right: 10px;
     background-color: #aaa;
   }
+}
+.shoplist {
+  display: flex;
+  flex-direction: column;
 }
 </style>

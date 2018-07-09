@@ -1,4 +1,5 @@
 const http = require('http');
+const https = require('https');
 const fs = require('fs');
 
 http.createServer((request, response) => {
@@ -21,7 +22,9 @@ http.createServer((request, response) => {
                 }
             }
         }`);
+        response.end("");
     }else if(/navigation/.test(request.url)){
+
         response.write(`[
     {
         "nav_id":0,
@@ -90,9 +93,28 @@ http.createServer((request, response) => {
         "to":"/"
     }
 ]`);
+        setTimeout(()=>{
+            response.end("");
+        },0);
+        
+    }else if (/shoplists/.test(request.url)){
+        let jsonStr = '';
+        https.get('https://h5.ele.me/restapi/shopping/v3/restaurants?latitude=29.712034&longitude=115.992811&offset=0&limit=8&extras[]=activities&extras[]=tags&extra_filters=home&terminal=h5', (res) => {
+
+          res.on('data', (d) => {
+            jsonStr+=d;
+          });
+          res.on('end',()=>{
+            // console.log(jsonStr);
+            response.write(jsonStr);
+            response.end("");
+          });
+        }).on('error', (e) => {
+          console.error(e);
+        });
     }
 
-    response.end("");
+    
 
 }).listen(8888);
 
