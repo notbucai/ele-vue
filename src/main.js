@@ -7,7 +7,7 @@ import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.min.css';
 
 import 'mint-ui/lib/style.css'
-import { Search, Cell, Header, Button, TabContainer, TabContainerItem } from 'mint-ui';
+import { Search, Cell, Header, Button, TabContainer, TabContainerItem ,Toast } from 'mint-ui';
 
 Vue.component(TabContainer.name, TabContainer);
 Vue.component(TabContainerItem.name, TabContainerItem);

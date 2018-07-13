@@ -1,7 +1,8 @@
 import {
     RECEIVE_ADDRESS,
     RECEIVE_SHOPLISTS,
-    RECEIVE_NAVIGATION
+    RECEIVE_NAVIGATION,
+    RECEIVE_USER_DATA
 } from "./mutation-type";
 
 export default {
@@ -13,5 +14,8 @@ export default {
     },
     [RECEIVE_SHOPLISTS](state, { shoplists }) {
         state.shoplists = shoplists;
+    },
+    [RECEIVE_USER_DATA](state, { userData }) {
+        state.userData = userData;
     }
 }

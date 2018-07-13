@@ -1,13 +1,15 @@
 import {
     RECEIVE_ADDRESS,
     RECEIVE_SHOPLISTS,
-    RECEIVE_NAVIGATION
+    RECEIVE_NAVIGATION,
+    RECEIVE_USER_DATA
 } from "./mutation-type";
 
 import {
     getAddress,
     getNavigation,
-    getShoplists
+    getShoplists,
+    getUserData
 } from "../api/";
 export default {
     async  getAddress({ commit, state }) {
@@ -45,8 +47,12 @@ export default {
         let { longitude, latitude } = state;
         let result = await getShoplists(longitude + "," + latitude);
         const shoplists = result.items;
-       
 
         commit(RECEIVE_SHOPLISTS, { shoplists });
+    },
+    async getUserData({ commit }) {
+        let result = await getUserData();
+        let userData = result || {};
+        commit(RECEIVE_USER_DATA, { userData });
     }
 }

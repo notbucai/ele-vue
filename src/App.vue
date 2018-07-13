@@ -8,16 +8,19 @@
 <script>
 import axios from "axios";
 import FootGuide from "./components/FootGuide/FootGuide.vue";
-
+import { mapActions } from "vuex";
 export default {
   name: "App",
   components: { FootGuide },
-  
+  mounted(){
+    this.$store.dispatch('getUserData');
+  },
   data() {
     return {
       content: ""
     };
-  }
+  },
+
 };
 </script>
 

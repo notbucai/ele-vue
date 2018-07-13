@@ -1,5 +1,5 @@
 import axios from "axios";
-
+axios.defaults.withCredentials=true;
 export default function ({ url, data = {}, type = "GET" }) {
     // let promise;
     // if (type === "GET") {
@@ -14,7 +14,7 @@ export default function ({ url, data = {}, type = "GET" }) {
     //         url += "?" + dataStr;
     //     }
     //     console.log(url);
-        
+
     //     promise = axios.get(url);
     // } else if (type === "POST") {
     //     promise = axios.post(url, data);
@@ -36,7 +36,11 @@ export default function ({ url, data = {}, type = "GET" }) {
 
             promise = axios.get(url);
         } else if (type === "POST") {
-            promise = axios.post(url, data);
+            promise = axios.post(url, data, {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                }
+            });
         }
 
         promise.then((response) => {

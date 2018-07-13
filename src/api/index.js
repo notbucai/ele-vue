@@ -8,3 +8,16 @@ export const getNavigation = (geohash) => ajax({ url: `http://192.168.1.3:8888/n
 
 //获取商家列表
 export const getShoplists = (geohash) => ajax({ url: `http://192.168.1.3:8888/shoplists/${geohash}` });
+
+//登陆 获取cookie
+
+export const login = (data) => ajax({
+    url: `http://192.168.1.3:8888/login/`,
+    data,
+    type:"POST"
+});
+
+//获取个人数据
+export const getUserData = () => ajax({
+    url: `http://192.168.1.3:8888/user_data/`,
+});

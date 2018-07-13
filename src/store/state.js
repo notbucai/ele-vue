@@ -9,5 +9,6 @@ export default {
     navigation: [],
     //商家列表
     shoplists: [],
-
+    //用户数据
+    userData: {},
 }

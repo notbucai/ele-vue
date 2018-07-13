@@ -6,37 +6,38 @@
 
     <router-link to="/login">
       <section class="profile-info">
-      <div class="profile-info-img">
-        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAMAAAAOusbgAAAAM1BMVEXE5/XI6fbT7fjW7/jl9fvw+f3////a8Pnt+PzL6vb7/v7i8/rP7Pf4/P7e8vn0+/3p9vvI4mwRAAACI0lEQVR4Ae3YBxbkIAgGYDCKgqbc/7LbS5hJexvMNr7Xp/0j9oBzzjnnnHPOuX8Qhq/wycwhJvopxQGfSM2F3pXcOZuj0DaJDN1gpSMRoY9B6Jhk6AALnSsI1tpIV0jrX+ZHyp3putwzN9XA8BmHmvolN1LGCWENp5GUADZYVGyGd1lFC4OJmVYqbKu0MoOFem22TPrv3cf004ywa6A1htvStdw2Go+vcC03C5EuzV3pSv/iQsqCllN4gj1tJmWC+342JV1dx8cGBuR8nEbznVHNkQW28UxKBeV+pRtsCrrMEsDGeLIIVlISgg08HqiYSIlgJRxWuoku8wA2VCU3dwVlZugQnE4PnYt+t05wR6FvysmeIPltrC8mC3U97t65bRQq9whO23uC6gRp9sFMa9NOJ8z2wWF3T1BvDfdXzLLb4oL7a1m9P53mq50PwSR42ltA2v6eEC2uFGH38Ja39wRVDUGDTSJudH+ETSg3G6wuESO8anxSpww3xF+aGvX+yWvQZ72rohQ0O+wFeI6q9QiPYr0cPGih31Rs1pfjBy2/KxnlYjJPtTYwNFy7CE5CnyzGxf4pMWzhQkTWyTjTWkV4hVW6PNhjIWUZdF+okgiDnSakSakhMHAItQhpAXom7xN+8nG1OnTawkRXJARzlc5V6KElOpYadJJH2jdm6CjPtG3O0FmL780eY4MncI5J6CtJMTM8iwODc84555xzzv0PPgKMKi2olgNo0QAAAABJRU5ErkJggg==" alt="">
-      </div>
-      <div class="profile-info-main">
-        <p class="name">登录/注册</p>
-        <p class="phone">
-          <i>图标</i>
-          <span>登录后享受更多特权</span>
-        </p>
-      </div>
-      <span class="profile-info-open iconfont icon-youjiantou"></span>
-    </section>
+        <div class="profile-info-img">
+          <img v-if="userData.img_path" :src="userData.img_path" alt="">
+          <img v-else src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAMAAAAOusbgAAAAM1BMVEXE5/XI6fbT7fjW7/jl9fvw+f3////a8Pnt+PzL6vb7/v7i8/rP7Pf4/P7e8vn0+/3p9vvI4mwRAAACI0lEQVR4Ae3YBxbkIAgGYDCKgqbc/7LbS5hJexvMNr7Xp/0j9oBzzjnnnHPOuX8Qhq/wycwhJvopxQGfSM2F3pXcOZuj0DaJDN1gpSMRoY9B6Jhk6AALnSsI1tpIV0jrX+ZHyp3putwzN9XA8BmHmvolN1LGCWENp5GUADZYVGyGd1lFC4OJmVYqbKu0MoOFem22TPrv3cf004ywa6A1htvStdw2Go+vcC03C5EuzV3pSv/iQsqCllN4gj1tJmWC+342JV1dx8cGBuR8nEbznVHNkQW28UxKBeV+pRtsCrrMEsDGeLIIVlISgg08HqiYSIlgJRxWuoku8wA2VCU3dwVlZugQnE4PnYt+t05wR6FvysmeIPltrC8mC3U97t65bRQq9whO23uC6gRp9sFMa9NOJ8z2wWF3T1BvDfdXzLLb4oL7a1m9P53mq50PwSR42ltA2v6eEC2uFGH38Ja39wRVDUGDTSJudH+ETSg3G6wuESO8anxSpww3xF+aGvX+yWvQZ72rohQ0O+wFeI6q9QiPYr0cPGih31Rs1pfjBy2/KxnlYjJPtTYwNFy7CE5CnyzGxf4pMWzhQkTWyTjTWkV4hVW6PNhjIWUZdF+okgiDnSakSakhMHAItQhpAXom7xN+8nG1OnTawkRXJARzlc5V6KElOpYadJJH2jdm6CjPtG3O0FmL780eY4MncI5J6CtJMTM8iwODc84555xzzv0PPgKMKi2olgNo0QAAAABJRU5ErkJggg==" alt="">
+        </div>
+        <div class="profile-info-main">
+          <p class="name">{{userData.name || "登录/注册"}}</p>
+          <p class="phone">
+            <i>图标</i>
+            <span>{{userData.tell||"登录后享受更多特权"}}</span>
+          </p>
+        </div>
+        <span class="profile-info-open iconfont icon-youjiantou"></span>
+      </section>
     </router-link>
     <div class="profile-nav">
       <a href="javascript:;" class="nav-item">
         <p class="icon">
           <i class="iconfont icon-qian"></i>
         </p>
-        <p class="text">钱包</p>
+        <p class="text">{{userData.my_money||"钱包"}}</p>
       </a>
       <a href="javascript:;" class="nav-item">
         <p class="icon">
           <i class="iconfont icon-hongbao"></i>
         </p>
-        <p class="text">红包</p>
+        <p class="text">{{userData.lucky_money||"红包"}}</p>
       </a>
       <a href="javascript:;" class="nav-item">
         <p class="icon">
           <i class="iconfont icon-tubiao207"></i>
         </p>
-        <p class="text">金币</p>
+        <p class="text">{{userData.gold_coin||"金币"}}</p>
       </a>
     </div>
     <section class="container">
@@ -64,12 +65,16 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "vuex";
 export default {
   name: "profile",
   data() {
     return {
       msg: "Welcome to Your Vue.js App"
     };
+  },
+  computed: {
+    ...mapState(["userData"])
   }
 };
 </script>
