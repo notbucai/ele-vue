@@ -23,21 +23,24 @@
     <div class="profile-nav">
       <a href="javascript:;" class="nav-item">
         <p class="icon">
-          <i class="iconfont icon-qian"></i>
+          <i v-if="!userData.code" class="iconfont icon-qian"></i>
+          <i v-else>{{userData.my_money}}</i>
         </p>
-        <p class="text">{{userData.my_money||"钱包"}}</p>
+        <p class="text">钱包</p>
       </a>
       <a href="javascript:;" class="nav-item">
         <p class="icon">
-          <i class="iconfont icon-hongbao"></i>
+          <i v-if="!userData.code" class="iconfont icon-hongbao"></i>
+          <i v-else>{{userData.my_money}}</i>
         </p>
-        <p class="text">{{userData.lucky_money||"红包"}}</p>
+        <p class="text">红包</p>
       </a>
       <a href="javascript:;" class="nav-item">
         <p class="icon">
-          <i class="iconfont icon-tubiao207"></i>
+          <i v-if="!userData.code" class="iconfont icon-hongbao"></i>
+          <i v-else>{{userData.gold_coin}}</i>
         </p>
-        <p class="text">{{userData.gold_coin||"金币"}}</p>
+        <p class="text">金币</p>
       </a>
     </div>
     <section class="container">

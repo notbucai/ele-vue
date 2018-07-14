@@ -8,7 +8,7 @@ http.createServer((request, response) => {
     if (/address/.test(request.url)) {
          response.writeHead(200,{ 
             "Content-Type": "application/json; charset=UTF-8", 
-            "Access-Control-Allow-Origin" : "http://localhost:8080" ,
+            "Access-Control-Allow-Origin" : "http://192.168.1.3:8080" ,
             'Access-Control-Allow-Methods' : 'GET, POST, OPTIONS',
             'Access-Control-Allow-Headers' : '*',
             "Access-Control-Allow-Credentials": "true"
@@ -33,7 +33,7 @@ http.createServer((request, response) => {
     }else if(/navigation/.test(request.url)){
  response.writeHead(200,{ 
             "Content-Type": "application/json; charset=UTF-8", 
-            "Access-Control-Allow-Origin" : "http://localhost:8080" ,
+            "Access-Control-Allow-Origin" : "http://192.168.1.3:8080" ,
             'Access-Control-Allow-Methods' : 'GET, POST, OPTIONS',
             'Access-Control-Allow-Headers' : '*',
             "Access-Control-Allow-Credentials": "true"
@@ -113,7 +113,7 @@ http.createServer((request, response) => {
     }else if (/shoplists/.test(request.url)){
          response.writeHead(200,{ 
             "Content-Type": "application/json; charset=UTF-8", 
-            "Access-Control-Allow-Origin" : "http://localhost:8080" ,
+            "Access-Control-Allow-Origin" : "http://192.168.1.3:8080" ,
             'Access-Control-Allow-Methods' : 'GET, POST, OPTIONS',
             'Access-Control-Allow-Headers' : '*',
             "Access-Control-Allow-Credentials": "true"
@@ -147,7 +147,7 @@ http.createServer((request, response) => {
             ]);
          response.writeHead(200,{ 
             "Content-Type": "application/json; charset=UTF-8", 
-            "Access-Control-Allow-Origin" : "http://localhost:8080" ,
+            "Access-Control-Allow-Origin" : "http://192.168.1.3:8080" ,
             'Access-Control-Allow-Methods' : 'GET, POST, OPTIONS',
             'Access-Control-Allow-Headers' : '*',
             "Access-Control-Allow-Credentials": "true"
@@ -160,13 +160,14 @@ http.createServer((request, response) => {
     }else if(/user_data/.test(request.url)){
         response.writeHead(200,{ 
                     "Content-Type": "application/json; charset=UTF-8", 
-                    "Access-Control-Allow-Origin" : "http://localhost:8080" ,
+                    "Access-Control-Allow-Origin" : "http://192.168.1.3:8080" ,
                     'Access-Control-Allow-Methods' : 'GET, POST, OPTIONS',
                     'Access-Control-Allow-Headers' : '*',
                     "Access-Control-Allow-Credentials": "true"
         });
         let data = null;
-        request.headers.cookie.split(';').forEach(cookie => {
+        let cookies = request.headers.cookie || "";
+        cookies.split(';').forEach(cookie => {
             let re = cookie.trim().split("=");
             if(re[0] == "USERID"){
                 if(true/*假设这里是调用的方法 并将是否成功返回出去了*/){

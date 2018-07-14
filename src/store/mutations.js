@@ -10,12 +10,14 @@ export default {
         state.address = address;
     },
     [RECEIVE_NAVIGATION](state, { navigation }) {
+        
         state.navigation = navigation;
     },
     [RECEIVE_SHOPLISTS](state, { shoplists }) {
         state.shoplists = shoplists;
     },
     [RECEIVE_USER_DATA](state, { userData }) {
+        
         state.userData = userData;
     }
 }
