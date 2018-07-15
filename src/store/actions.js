@@ -12,7 +12,7 @@ import {
     getUserData
 } from "../api/";
 export default {
-    async  getAddress({ commit, state }) {
+    async getAddress({ commit, state }) {
         console.log(state);
 
         let { longitude, latitude } = state;
@@ -20,7 +20,7 @@ export default {
         let address = result.data;
         commit(RECEIVE_ADDRESS, { address });
     },
-    async  getNavigation({ commit, state }) {
+    async getNavigation({ commit, state }) {
         console.log(state);
 
         let { longitude, latitude } = state;
@@ -41,7 +41,7 @@ export default {
 
         commit(RECEIVE_NAVIGATION, { navigation });
     },
-    async  getShoplists({ commit, state }) {
+    async getShoplists({ commit, state }) {
         console.log(state);
 
         let { longitude, latitude } = state;
@@ -50,9 +50,25 @@ export default {
 
         commit(RECEIVE_SHOPLISTS, { shoplists });
     },
+    async updateShoplists({ commit, state }) {
+
+        let { longitude, latitude, shoplists } = state;
+        //todo 暂时调用原接口，获取数据后合并
+        let result = await getShoplists(longitude + "," + latitude);
+        //
+        // console.log(result.items,shoplists);
+
+        shoplists = shoplists.concat(result.items);
+
+        // console.log(shoplists);
+        commit(RECEIVE_SHOPLISTS, { shoplists });
+    },
     async getUserData({ commit }) {
         let result = await getUserData();
+
         let userData = result || {};
-        commit(RECEIVE_USER_DATA, { userData });
+        if (userData.code === 0) {
+            commit(RECEIVE_USER_DATA, { userData });
+        }
     }
 }

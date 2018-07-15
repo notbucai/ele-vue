@@ -172,7 +172,7 @@ http.createServer((request, response) => {
             if(re[0] == "USERID"){
                 if(true/*假设这里是调用的方法 并将是否成功返回出去了*/){
                     data = `{
-                        "code":"0",
+                        "code":0,
                         "name":"不才",
                         "user_id":"8f00b204e9800998",
                         "lucky_money":5,

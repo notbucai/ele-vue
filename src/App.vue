@@ -14,6 +14,8 @@ export default {
   components: { FootGuide },
   mounted(){
     this.$store.dispatch('getUserData');
+    this.$store.dispatch("getAddress");
+    this.$store.dispatch("getNavigation");
   },
   data() {
     return {

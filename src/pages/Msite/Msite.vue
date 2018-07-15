@@ -4,25 +4,34 @@
       <router-link to="/" slot="left">
         <mt-button class="iconfont  icon-sousuo"></mt-button>
       </router-link>
-      <mt-button slot="right">登陆 | 注册</mt-button>
+      <router-link v-if="userData.code!==0" to="/login" slot="right">登陆 | 注册</router-link>
+      <router-link v-else to="/userinfo" slot="right"><i class="iconfont icon-wode"></i></router-link>
     </mt-header>
 
     <Nav/>
 
     <div class="shoplist-title">推荐商家</div>
 
-    <section class="shoplist">
-      <List v-for="(shop) in shoplists" :restaurant="shop.restaurant" :key="shop.id"/>
+    <section class="shoplist" v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="10">
+      <!--
+        <ul
+        v-infinite-scroll="loadMore"
+        infinite-scroll-disabled="loading"
+        infinite-scroll-distance="10">
+          <li v-for="item in list">{{ item }}</li>
+        </ul>
+       -->
+      <List v-for="(shop) in shoplists" :restaurant="shop.restaurant" :key="shop.id" />
 
     </section>
-
+    <section :class="{'loading':shoplists.length }" style="display:none">加载中。。。</section>
   </div>
 </template>
 
 <script>
 import Nav from "./components/Nav.vue";
 import List from "./components/List.vue";
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 export default {
   name: "msite",
   components: {
@@ -30,17 +39,30 @@ export default {
     List
   },
   mounted() {
-    this.$store.dispatch("getAddress");
-    this.$store.dispatch("getNavigation");
     this.$store.dispatch("getShoplists");
   },
   computed: {
-    ...mapState(["address","shoplists"])
+    ...mapState(["address", "shoplists","userData"])
+  },
+  methods: {
+    ...mapActions(["updateShoplists"]),
+    loadMore() {
+      this.loading = true;
+      this.updateShoplists();
+    }
   },
   data() {
     return {
-      msg: "Welcome to Your Vue.js App"
+      msg: "Welcome to Your Vue.js App",
+      loading: true
     };
+  },
+  watch: {
+    shoplists() {
+      if (this.shoplists.length > 0) {
+        this.loading = false;
+      }
+    }
   }
 };
 </script>
@@ -75,5 +97,13 @@ export default {
 .shoplist {
   display: flex;
   flex-direction: column;
+}
+.loading {
+  margin-bottom: 60px;
+  height: 30px;
+  line-height: 30px;
+  width: 100%;
+  display: block !important;
+  text-align: center;
 }
 </style>

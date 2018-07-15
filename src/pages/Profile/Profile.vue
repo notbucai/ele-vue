@@ -4,7 +4,7 @@
       <mt-button slot="left" class="iconfont icon-fanhui1"></mt-button>
     </mt-header>
 
-    <router-link to="/login">
+    <router-link :to="userData.code===0?'/userinfo':'/login'">
       <section class="profile-info">
         <div class="profile-info-img">
           <img v-if="userData.img_path" :src="userData.img_path" alt="">
@@ -23,21 +23,21 @@
     <div class="profile-nav">
       <a href="javascript:;" class="nav-item">
         <p class="icon">
-          <i v-if="!userData.code" class="iconfont icon-qian"></i>
+          <i v-if="userData.code!==0" class="iconfont icon-qian"></i>
           <i v-else>{{userData.my_money}}</i>
         </p>
         <p class="text">钱包</p>
       </a>
       <a href="javascript:;" class="nav-item">
         <p class="icon">
-          <i v-if="!userData.code" class="iconfont icon-hongbao"></i>
-          <i v-else>{{userData.my_money}}</i>
+          <i v-if="userData.code!==0" class="iconfont icon-hongbao"></i>
+          <i v-else>{{userData.lucky_money}}</i>
         </p>
         <p class="text">红包</p>
       </a>
       <a href="javascript:;" class="nav-item">
         <p class="icon">
-          <i v-if="!userData.code" class="iconfont icon-hongbao"></i>
+          <i v-if="userData.code!==0" class="iconfont icon-hongbao"></i>
           <i v-else>{{userData.gold_coin}}</i>
         </p>
         <p class="text">金币</p>

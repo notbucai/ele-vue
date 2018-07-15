@@ -7,7 +7,16 @@ import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.min.css';
 
 import 'mint-ui/lib/style.css'
-import { Search, Cell, Header, Button, TabContainer, TabContainerItem ,Toast } from 'mint-ui';
+import {
+  Search,
+  Cell,
+  Header,
+  Button,
+  TabContainer,
+  TabContainerItem,
+  Toast,
+  InfiniteScroll
+} from 'mint-ui';
 
 Vue.component(TabContainer.name, TabContainer);
 Vue.component(TabContainerItem.name, TabContainerItem);
@@ -15,6 +24,7 @@ Vue.component(Button.name, Button)
 Vue.component(Header.name, Header)
 Vue.component(Search.name, Search);
 Vue.component(Cell.name, Cell);
+Vue.use(InfiniteScroll);
 
 Vue.config.productionTip = false
 
