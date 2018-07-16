@@ -81,7 +81,7 @@ export default {
           case 0:
             //成功 调用获取个人资料方法 并返回个人主页
             this.$store.dispatch('getUserData');
-            this.$router.back();
+            this.$router.replace("/profile");
             break;
           default:
             break;

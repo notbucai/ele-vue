@@ -8,7 +8,7 @@ http.createServer((request, response) => {
     if (/address/.test(request.url)) {
          response.writeHead(200,{ 
             "Content-Type": "application/json; charset=UTF-8", 
-            "Access-Control-Allow-Origin" : "http://192.168.1.3:8080" ,
+            "Access-Control-Allow-Origin" : "http://192.168.1.4:8080" ,
             'Access-Control-Allow-Methods' : 'GET, POST, OPTIONS',
             'Access-Control-Allow-Headers' : '*',
             "Access-Control-Allow-Credentials": "true"
@@ -33,7 +33,7 @@ http.createServer((request, response) => {
     }else if(/navigation/.test(request.url)){
  response.writeHead(200,{ 
             "Content-Type": "application/json; charset=UTF-8", 
-            "Access-Control-Allow-Origin" : "http://192.168.1.3:8080" ,
+            "Access-Control-Allow-Origin" : "http://192.168.1.4:8080" ,
             'Access-Control-Allow-Methods' : 'GET, POST, OPTIONS',
             'Access-Control-Allow-Headers' : '*',
             "Access-Control-Allow-Credentials": "true"
@@ -113,7 +113,7 @@ http.createServer((request, response) => {
     }else if (/shoplists/.test(request.url)){
          response.writeHead(200,{ 
             "Content-Type": "application/json; charset=UTF-8", 
-            "Access-Control-Allow-Origin" : "http://192.168.1.3:8080" ,
+            "Access-Control-Allow-Origin" : "http://192.168.1.4:8080" ,
             'Access-Control-Allow-Methods' : 'GET, POST, OPTIONS',
             'Access-Control-Allow-Headers' : '*',
             "Access-Control-Allow-Credentials": "true"
@@ -142,12 +142,12 @@ http.createServer((request, response) => {
 
      
         response.setHeader("set-cookie",[
-            "USERID=273943435;Domain=192.168.1.3; Max-Age=31536000;path=/" ,
+            "USERID=273943435;Domain=192.168.1.4; Max-Age=31536000;path=/" ,
             "admin=11111; Domain=localhost; Max-Age=31536000;path=/; " 
             ]);
          response.writeHead(200,{ 
             "Content-Type": "application/json; charset=UTF-8", 
-            "Access-Control-Allow-Origin" : "http://192.168.1.3:8080" ,
+            "Access-Control-Allow-Origin" : "http://192.168.1.4:8080" ,
             'Access-Control-Allow-Methods' : 'GET, POST, OPTIONS',
             'Access-Control-Allow-Headers' : '*',
             "Access-Control-Allow-Credentials": "true"
@@ -160,7 +160,7 @@ http.createServer((request, response) => {
     }else if(/user_data/.test(request.url)){
         response.writeHead(200,{ 
                     "Content-Type": "application/json; charset=UTF-8", 
-                    "Access-Control-Allow-Origin" : "http://192.168.1.3:8080" ,
+                    "Access-Control-Allow-Origin" : "http://192.168.1.4:8080" ,
                     'Access-Control-Allow-Methods' : 'GET, POST, OPTIONS',
                     'Access-Control-Allow-Headers' : '*',
                     "Access-Control-Allow-Credentials": "true"
@@ -175,6 +175,7 @@ http.createServer((request, response) => {
                         "code":0,
                         "name":"不才",
                         "user_id":"8f00b204e9800998",
+                        "tell":"137*****457",
                         "lucky_money":5,
                         "my_money":20.5,
                         "gold_coin":888,

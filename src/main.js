@@ -28,7 +28,6 @@ Vue.use(InfiniteScroll);
 
 Vue.config.productionTip = false
 
-
 Vue.use(VueAwesomeSwiper);
 import router from "./router";
 import store from './store/';

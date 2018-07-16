@@ -12,7 +12,10 @@
 
     <div class="shoplist-title">推荐商家</div>
 
-    <section class="shoplist" v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="10">
+    <section class="shoplist" 
+      v-infinite-scroll="loadMore"
+      infinite-scroll-disabled="loading"
+      infinite-scroll-distance="30">
       <!--
         <ul
         v-infinite-scroll="loadMore"

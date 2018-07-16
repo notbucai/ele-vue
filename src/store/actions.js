@@ -2,7 +2,8 @@ import {
     RECEIVE_ADDRESS,
     RECEIVE_SHOPLISTS,
     RECEIVE_NAVIGATION,
-    RECEIVE_USER_DATA
+    RECEIVE_USER_DATA,
+    CLEAR_USER_DATA
 } from "./mutation-type";
 
 import {
@@ -70,5 +71,9 @@ export default {
         if (userData.code === 0) {
             commit(RECEIVE_USER_DATA, { userData });
         }
+    },
+    async clearUserData({ commit }) {
+        //发送推出登陆请求到服务器
+        commit(CLEAR_USER_DATA);
     }
 }
