@@ -1,7 +1,6 @@
 <template>
   <div class="profile">
     <mt-header title="我的">
-      <mt-button slot="left" class="iconfont icon-fanhui1"></mt-button>
     </mt-header>
 
     <router-link :to="userData.code===0?'/userinfo':'/login'">

@@ -7,6 +7,11 @@ import Profile from '../pages/Profile/Profile.vue'
 import Search from '../pages/Search/Search.vue'
 import Login from '../pages/Login/Login.vue'
 import UserInfo from '../pages/userinfo/UserInfo.vue'
+import Shop from '../pages/Shop/Shop.vue'
+import ShopSelect from '../pages/Shop/ShopSelect/ShopSelect.vue'
+import ShopInfo from '../pages/Shop/ShopInfo/ShopInfo.vue'
+import ShopEvaluate from '../pages/Shop/ShopEvaluate/ShopEvaluate.vue'
+
 
 export default new VueRouter({
     routes: [
@@ -50,6 +55,28 @@ export default new VueRouter({
         {
             path: '/userinfo',
             component: UserInfo,
+        },
+        {
+            path: '/shop',
+            component: Shop,
+            children:[
+                {
+                    path: '/shop/slelect',
+                    component: ShopSelect,
+                },
+                {
+                    path: '/shop/info',
+                    component: ShopInfo,
+                },
+                {
+                    path: '/shop/evaluate',
+                    component: ShopEvaluate,
+                },
+                {
+                    path: '',
+                    redirect: '/shop/slelect'
+                },
+            ],
         }
 
     ]

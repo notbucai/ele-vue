@@ -189,6 +189,25 @@ http.createServer((request, response) => {
             "code":"-1",
             "value":"出现问题，具体是啥以后再说"
         }`);
+    }else if(/shop_detail/.test(request.url)){
+        response.writeHead(200,{ 
+            "Content-Type": "application/json; charset=UTF-8", 
+            "Access-Control-Allow-Origin" : "http://192.168.1.4:8080" ,
+            'Access-Control-Allow-Methods' : 'GET, POST, OPTIONS',
+            'Access-Control-Allow-Headers' : '*',
+            "Access-Control-Allow-Credentials": "true"
+        });
+        fs.readFile("./api/v2.json",function(err,data){
+            console.log(111)
+            if(!err){
+                //response.write()向请求的客户端发送响应内容。
+                response.write(data.toString());
+                response.end("");
+            }else{
+                response.end(err.toString());
+            }
+        });
+
     }
 
 

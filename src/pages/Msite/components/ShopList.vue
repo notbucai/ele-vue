@@ -32,6 +32,7 @@
             </div>
         </section> -->
     <section v-for="(shop) in shoplists" :key="shop.restaurant.id" class="shoplist-item">
+
       <div class="container">
         <div class="item-img">
           <img :src="getImgUrl(shop.restaurant.image_path)" alt="">
@@ -74,9 +75,6 @@
 <script>
 import { mapState } from "vuex";
 export default {
-  props: {
-    shoplist: Array
-  },
   data() {
     return {
       msg: "Welcome to Your Vue.js App",
@@ -95,7 +93,13 @@ export default {
         path = "png";
       }
       return `//fuss10.elemecdn.com/${image_path}.${path}`;
-    }
+    },
+    open(key) {
+      console.log(111);
+      
+      localStorage.setItem("shop_item", key);
+      this.$router.push("/shop");
+    },
   }
 };
 </script>
