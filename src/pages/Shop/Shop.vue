@@ -3,7 +3,7 @@
 
     <ShopHeader/>
 
-    <div class="tab">
+    <div class="tab" ref="tabRef">
       <div class="slelect" @click="$router.replace(`/shop/slelect`)">
         <span :class="{'yes':$route.path == '/shop/slelect'}">点餐</span>
       </div>
@@ -14,8 +14,8 @@
         <span :class="{'yes':$route.path == '/shop/info'}">商家</span>
       </div>
     </div>
+    <router-view :tabRefElement="tabRefElement"></router-view>
 
-    <router-view></router-view>
   </section>
 </template>
 
@@ -25,6 +25,11 @@ import ShopHeader from "./components/ShopHeader.vue";
 export default {
   components: {
     ShopHeader
+  },
+  computed:{
+    tabRefElement(){
+      return this.$refs;
+    }
   }
 };
 </script>
@@ -34,9 +39,12 @@ export default {
 .tab {
   display: flex;
   position: sticky;
+  z-index: 3;
+  top: -2px;
   height: 40px;
   line-height: 40px;
   box-shadow: 0 1px 2px 0 #ddd;
+  background-color: #fff;
   > div {
     flex: 1;
     text-align: center;
