@@ -22,7 +22,9 @@ eric/tools/css/reset/)
      border: 0;
      font: inherit;
      vertical-align: baseline;
-     -webkit-text-size-adjust: none;
+ }
+ html{
+    -webkit-text-size-adjust: none;
  }
  /* HTML5 display-role reset for older browsers */
  article, aside, details, figcaption, figure, 

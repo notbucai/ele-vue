@@ -4,71 +4,20 @@
       <main>
         <div class="menucategory">
           <ul>
-            <li>
-              <span class="menucategory-name">热销</span>
+            <li v-for="(item, index) in ['热销','优惠','米饭区、加饭区，需要的的请点','蔬菜区','荤菜区','饮料','炒粉，炒饭','家常小炒类','8元盖浇饭','10元盖浇饭','混沌','12元盖浇饭']" :key="index" :class="{active:isTopID == item}" @click="skip(item)">
+              <span class="menucategory-name">{{item}}</span>
             </li>
-            <li>
-              <span class="menucategory-name">优惠</span>
-            </li>
-            <li>
-              <span class="menucategory-name">米饭区、加饭区，需要的的请点</span>
-              <span class="menucategory-quantity">3</span>
-            </li>
-            <li>
-              <span class="menucategory-name">蔬菜区</span>
-            </li>
-            <li>
-              <span class="menucategory-name">荤菜区</span>
-            </li>
-            <li>
-              <span class="menucategory-name">饮料</span>
-            </li>
-            <li>
-              <span class="menucategory-name">炒粉，炒饭</span>
-              <span class="menucategory-quantity">10</span>
-            </li>
-            <li>
-              <span class="menucategory-name">家常小炒类</span>
-            </li>
-            <li>
-              <span class="menucategory-name">8元盖浇饭</span>
-              <span class="menucategory-quantity">1</span>
-            </li>
-            <li>
-              <span class="menucategory-name">10元盖浇饭</span>
-            </li>
-            <li>
-              <span class="menucategory-name">混沌</span>
-            </li>
-            <li>
-              <span class="menucategory-name">12元盖浇饭</span>
-              <span class="menucategory-quantity">3</span>
-            </li>
+
           </ul>
         </div>
-        <section class="menuview" @scroll="scrollUp($event)">
+        <section ref="scrollUp" class="menuview" @scroll="scrollUp($event)">
 
-          <dl v-for="(item, index) in ['热销','优惠','米饭区、加饭区，需要的的请点','蔬菜区','荤菜区','饮料','炒粉，炒饭','家常小炒类','8元盖浇饭','10元盖浇饭','混沌','12元盖浇饭']" :key="index">
+          <dl v-for="(item, index) in ['热销','优惠','米饭区、加饭区，需要的的请点','蔬菜区','荤菜区','饮料','炒粉，炒饭','家常小炒类','8元盖浇饭','10元盖浇饭','混沌','12元盖浇饭']" ref="item" :data="item" :key="index">
             <dt>{{item}}</dt>
-            <dd v-for="(item, index) in Math.Ran" :key="index">
-              <div class="fooddetails">
-                <span class="fooddetails-logo">
-                  <img src="//fuss10.elemecdn.com/5/f4/77a3a6972f64b0ed551fecf853ee9jpeg.jpeg?imageMogr/format/webp/thumbnail/!140x140r/gravity/Center/crop/140x140/" alt="">
-                </span>
-                <section class="fooddetails-info">
-                  <h6 class="info-title">米饭一元化每份</h6>
-                  <p class="info-introduce">介绍一下这个米饭</p>
-                  <p class="info-sales">
-                    <span>月销855份</span>
-                    <span>好评率84%</span>
-                  </p>
-                  <span class="info-money">￥25</span>
-                  <div class="fooddetails-button"></div>
-                </section>
-              </div>
+            <dd v-for="(item, index) in 4" :key="index">
+              <Fooddetails/>
             </dd>
           </dl>
-
 
         </section>
       </main>
@@ -78,14 +27,20 @@
 
 <script>
 import { mapState } from "vuex";
+import Fooddetails from "./components/Fooddetails.vue";
 export default {
   props: {
     tabRefElement: Object
   },
+  components: {
+    Fooddetails
+  },
   data() {
     return {
       scrollTop: 0,
-      clientHeight: 600
+      clientHeight: 600,
+      isTopID: "热销",
+      skipTime: 0
     };
   },
   mounted() {
@@ -94,26 +49,86 @@ export default {
   },
   computed: {},
   methods: {
+    //获取屏幕高度（减去切换卡高度）
     getClient() {
-      this.clientHeight =
-        (document.documentElement.clientHeight || document.body.clientHeight) -
-        this.tabRefElement.tabRef.offsetHeight;
-      
-      console.log(this.tabRefElement.tabRef.offsetHeight);
+      // 为方便直接解析document的属性
+      let { body, documentElement } = document;
+      // 获取屏幕高度 同时为了解决兼容性问题（屏幕分辨率和屏幕宽度不一致。。。）
+      let clientHeight = documentElement.clientHeight;
+      let targetHeight = this.tabRefElement.tabRef.offsetHeight;
 
-      console.log(this, this.clientHeight);
+      this.clientHeight = clientHeight - targetHeight;
+
+      //
+      console.log(this.tabRefElement.tabRef.offsetHeight);
+      console.log(this.clientHeight);
 
       // alert(this.scrollHeight);
     },
+    //子scroll向下拉时改变html的scroll
     scrollUp(event) {
       let { scrollTop } = event.target;
-      // console.log("位置",scrollTop);
-      // alert(document.body.scrollTop);
+      let { body, documentElement } = document;
+
       if (scrollTop > this.scrollTop) {
-        document.body.scrollTop = Math.floor(scrollTop * 0.8);
-        document.documentElement.scrollTop = Math.floor(scrollTop * 0.8);
+        let top = Math.floor(scrollTop - this.scrollTop);
+        body.scrollTop += top;
+        documentElement.scrollTop += top;
       }
       this.scrollTop = scrollTop;
+
+      this.isTop(scrollTop);
+    },
+    //用于判断当前滚动条位置
+    async isTop(scrollTop) {
+      let { item } = this.$refs;
+
+      // window.item = item;
+      let nodes = item.filter(element => {
+        // console.log(scrollTop, element.offsetTop);
+        return element.offsetTop <= scrollTop;
+      });
+
+      this.isTopID =
+        (nodes &&
+          nodes[nodes.length - 1] &&
+          nodes[nodes.length - 1].getAttribute("data")) ||
+        this.isTopID;
+    },
+    //跳转移动到指定栏目
+    skip(value) {
+      let { item } = this.$refs;
+      let { scrollUp } = this.$refs;
+
+      let node = item.find(element => {
+        return element.getAttribute("data").trim() === value.trim();
+      });
+      // console.log(value);
+
+      if (node) {
+        let dist = 20;
+        if (scrollUp.scrollTop > node.offsetTop) {
+          dist = -dist;
+        }
+
+        clearInterval(this.skipTime);
+        this.skipTime = setInterval(() => {
+          // console.log(scrollUp.scrollTop,scrollUp.scrollHeight,scrollUp.clientHeight);
+
+          if (
+            Math.abs(scrollUp.scrollTop - node.offsetTop) <= Math.abs(dist) ||
+            (dist > 0 &&
+              scrollUp.scrollTop + scrollUp.clientHeight ==
+                scrollUp.scrollHeight)
+          ) {
+            clearInterval(this.skipTime);
+            scrollUp.scrollTop = node.offsetTop;
+
+            return;
+          }
+          scrollUp.scrollTop += dist;
+        }, 1);
+      }
     }
   }
 };
@@ -121,8 +136,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-.shopselect {
-}
 .container {
   height: 100%;
   width: 100%;
@@ -142,6 +155,10 @@ export default {
     box-sizing: initial;
     padding: 16px 8px;
     font-size: 12px;
+    &.active {
+      background-color: #fff;
+      font-weight: 700;
+    }
   }
 }
 .menuview {
@@ -156,34 +173,6 @@ export default {
       font-weight: 700;
       padding: 8px 6px;
       color: #666;
-    }
-    dd {
-      .fooddetails {
-        display: flex;
-        flex-flow: row;
-        padding: 8px;
-        &-logo {
-          width: 88px;
-          height: 88px;
-          img {
-            width: 100%;
-          }
-        }
-        &-info {
-          padding-left: 10px;
-          .info-title {
-            font-size: 14px;
-            font-weight: 700;
-            line-height: 30px;
-          }
-          .info-introduce,
-          .info-sales {
-            font-size: 10px;
-            color:#666;
-          }
-
-        }
-      }
     }
   }
 }
