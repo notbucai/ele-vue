@@ -26,6 +26,8 @@ Vue.component(Search.name, Search);
 Vue.component(Cell.name, Cell);
 Vue.use(InfiniteScroll);
 
+import './mock/index';
+
 Vue.config.productionTip = false
 
 Vue.use(VueAwesomeSwiper);

@@ -21,3 +21,8 @@ export const login = (data) => ajax({
 export const getUserData = () => ajax({
     url: `http://192.168.1.4:8888/user_data/`,
 });
+
+//获取个人数据
+export const getTest = () => ajax({
+    url: `/api/data`,
+});

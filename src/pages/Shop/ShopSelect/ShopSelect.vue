@@ -45,6 +45,7 @@ export default {
   },
   mounted() {
     this.getClient();
+    this.$store.dispatch('getTestA');
     window.onresize = this.getClient;
   },
   computed: {},

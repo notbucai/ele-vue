@@ -10,7 +10,8 @@ import {
     getAddress,
     getNavigation,
     getShoplists,
-    getUserData
+    getUserData,
+    getTest
 } from "../api/";
 export default {
     async getAddress({ commit, state }) {
@@ -75,5 +76,9 @@ export default {
     async clearUserData({ commit }) {
         //发送推出登陆请求到服务器
         commit(CLEAR_USER_DATA);
+    },
+    async getTestA(){
+        console.log(await getTest());
+        
     }
 }

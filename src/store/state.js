@@ -11,4 +11,13 @@ export default {
     shoplists: [],
     //用户数据
     userData: {},
+
+    //商家食物列表
+    shopFoodList: {},
+    //商家信息/资料
+    shopInfo: {},
+    //商家评价列表
+    shopEvaluate: {},
+    //购物车
+    shoppingCart: {},
 }
