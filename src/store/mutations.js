@@ -3,7 +3,11 @@ import {
     RECEIVE_SHOPLISTS,
     RECEIVE_NAVIGATION,
     RECEIVE_USER_DATA,
-    CLEAR_USER_DATA
+    CLEAR_USER_DATA,
+    RECEIVE_SHOP_EVALUATE,
+    RECEIVE_SHOP_FOOD_LIST,
+    RECEIVE_SHOP_INFO,
+    RECEIVE_SHOPPING_CART
 } from "./mutation-type";
 
 export default {
@@ -25,5 +29,21 @@ export default {
         state.userData = {
             code: -1
         };
+    },
+    [RECEIVE_SHOP_EVALUATE](state, { shopEvaluate }) {
+
+        state.shopEvaluate = shopEvaluate;
+    },
+    [RECEIVE_SHOP_FOOD_LIST](state, { shopFoodList }) {
+
+        state.shopFoodList = shopFoodList;
+    },
+    [RECEIVE_SHOP_INFO](state, { shopInfo }) {
+
+        state.shopInfo = shopInfo;
+    },
+    [RECEIVE_SHOPPING_CART](state, { shoppingCart }) {
+
+        state.shoppingCart = shoppingCart;
     },
 }

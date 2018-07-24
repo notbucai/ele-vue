@@ -45,7 +45,7 @@ export default {
   },
   mounted() {
     this.getClient();
-    this.$store.dispatch('getTestA');
+    this.$store.dispatch('getShopFoodList',11);
     window.onresize = this.getClient;
   },
   computed: {},

@@ -26,6 +26,9 @@ export default {
   components: {
     ShopHeader
   },
+  mounted(){
+    this.$store.dispatch('getShopInfo',11);
+  },
   computed:{
     tabRefElement(){
       return this.$refs;

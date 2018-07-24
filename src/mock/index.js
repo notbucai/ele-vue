@@ -1,9 +1,23 @@
 // 使用 Mock
 import Mock from 'mockjs'
-Mock.mock('/api/data', (req, res) => {
+import V2 from './v2.json'
+Mock.mock(/\/api\/shopevaluate\/([0-9]+)/, (req, res) => {
     return {
-        data: ['a','b']
+        ...V2.rst
     }
 })
-// 输出结果
-console.log(JSON.stringify(data, null, 4))
+Mock.mock(/\/api\/shopinfo\/([0-9]+)/, (req, res) => {
+    return {
+        ...V2.rst
+    }
+})
+Mock.mock(/\/api\/shopFoodList\/([0-9]+)/, (req, res) => {
+    return {
+        ...V2.menu
+    }
+})
+Mock.mock(/\/api\/shoppingCart\/([0-9]+)/, (req, res) => {
+    return {
+        ...V2.bought_list
+    }
+})

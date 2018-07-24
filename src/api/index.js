@@ -22,7 +22,36 @@ export const getUserData = () => ajax({
     url: `http://192.168.1.4:8888/user_data/`,
 });
 
-//获取个人数据
-export const getTest = () => ajax({
-    url: `/api/data`,
+//获取商家食物列表
+export const getShopFoodList = (id) => ajax({
+    url: `/api/shopFoodList/${id}`,
 });
+
+//获取商家信息/资料
+export const getShopInfo = (id) => ajax({
+    url: `/api/shopinfo/${id}`,
+});
+
+//获取商家评价列表
+export const getShopEvaluate = (id) => ajax({
+    url: `/api/shopevaluate/${id}`,
+});
+
+//获取商家评价列表
+export const getShoppingCart = (id) => ajax({
+    url: `/api/shoppingCart/${id}`,
+});
+//购物车
+
+
+/**
+ * 
+    //商家食物列表
+    shopFoodList: {},
+    //商家信息/资料
+    shopInfo: {},
+    //商家评价列表
+    shopEvaluate: {},
+    //购物车
+    shoppingCart: {},
+ */

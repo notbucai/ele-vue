@@ -3,7 +3,11 @@ import {
     RECEIVE_SHOPLISTS,
     RECEIVE_NAVIGATION,
     RECEIVE_USER_DATA,
-    CLEAR_USER_DATA
+    CLEAR_USER_DATA,
+    RECEIVE_SHOP_EVALUATE,
+    RECEIVE_SHOP_FOOD_LIST,
+    RECEIVE_SHOP_INFO,
+    RECEIVE_SHOPPING_CART,
 } from "./mutation-type";
 
 import {
@@ -11,7 +15,10 @@ import {
     getNavigation,
     getShoplists,
     getUserData,
-    getTest
+    getShopEvaluate,
+    getShopFoodList,
+    getShopInfo,
+    getShoppingCart,
 } from "../api/";
 export default {
     async getAddress({ commit, state }) {
@@ -77,8 +84,45 @@ export default {
         //发送推出登陆请求到服务器
         commit(CLEAR_USER_DATA);
     },
-    async getTestA(){
-        console.log(await getTest());
-        
+
+    async getShopEvaluate({ commit }, id) {
+        let result = await getShopEvaluate(id);
+
+        // console.log(result);
+        if (result.code == 200) {
+            let shopEvaluate = result;
+            commit(RECEIVE_SHOP_EVALUATE, { shopEvaluate });
+        }
+
+    },
+    async getShopFoodList({ commit }, id) {
+        let result = await getShopFoodList(id);
+
+        // console.log(result);
+        if (result.code == 200) {
+            let shopFoodList = result;
+            commit(RECEIVE_SHOP_FOOD_LIST, { shopFoodList });
+        }
+        // commit(RECEIVE_SHOP_EVALUATE, { result });
+    },
+    async getShopInfo({ commit }, id) {
+        let result = await getShopInfo(id);
+
+        // console.log(result);
+        if (result.code == 200) {
+            let shopInfo = result;
+            commit(RECEIVE_SHOP_INFO, { shopInfo });
+        }
+        // commit(RECEIVE_SHOP_EVALUATE, { result });
+    },
+    async getShoppingCart({ commit }, id) {
+        let result = await getShoppingCart(id);
+
+        // console.log(result);
+        if (result.code == 200) {
+            let shoppingCart = result;
+            commit(RECEIVE_SHOPPING_CART, { shoppingCart });
+        }
+        // commit(RECEIVE_SHOP_EVALUATE, { result });
     }
 }
