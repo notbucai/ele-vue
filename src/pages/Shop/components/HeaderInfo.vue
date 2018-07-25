@@ -1,19 +1,19 @@
 <template>
     <section class="headerinfo">
         <div class="main">
-            <h2>神仙烧饭</h2>
+            <h2>{{shopInfo.name}}</h2>
             <div class="info">
                 <div class="info-item">
-                    <h4>4.4</h4>
+                    <h4>{{shopInfo.rating}}</h4>
                     <span>评分</span>
                 </div>
                 <div class="info-item">
-                    <h4>690单</h4>
+                    <h4>{{shopInfo.recent_order_num}}单</h4>
                     <span>月售</span>
                 </div>
                 <div class="info-item">
                     <h4>商家配送</h4>
-                    <span>约39分钟</span>
+                    <span>约{{shopInfo.order_lead_time}}分钟</span>
                 </div>
                 <div class="info-item">
                     <h4>2元</h4>
@@ -26,7 +26,7 @@
             </div>
             <div class="title">公告</div>
             <div class="notice">
-                <p>天气炎热，为了能尽快把餐送到亲的手上，请各位亲尽量提前预订哦。谢谢！</p>
+                <p>{{shopInfo.promotion_info}}</p>
             </div>
             <div class="iconfont icon-2guanbi close-icon" @click="close"></div>
 
@@ -40,6 +40,9 @@ import { mapState } from "vuex";
 export default {
   props: {
     close: Function
+  },
+  computed: {
+    ...mapState(['shopInfo'])
   },
   methods: {}
 };

@@ -1,34 +1,37 @@
 <template>
-    <div class="fooddetails">
-        <span class="fooddetails-logo">
-            <img src="//fuss10.elemecdn.com/5/f4/77a3a6972f64b0ed551fecf853ee9jpeg.jpeg?imageMogr/format/webp/thumbnail/!140x140r/gravity/Center/crop/140x140/" alt="">
-        </span>
-        <section class="fooddetails-info">
-            <h6 class="info-title">米饭一元化每份</h6>
-            <section class="info-detail">
-                <p class="info-introduce">介绍一下这个米饭</p>
-                <p class="info-sales">
-                    <span>月销855份</span>
-                    <span>好评率84%</span>
-                </p>
-                <div class="icon-activityRow">
-                    <span class="label">3.2折</span>
-                    <span>每单限1份优惠</span>
-                </div>
-            </section>
-            <span class="info-money">
-                <i class="iconfont icon-Money"></i>
-                <span>25</span>
-                <del>￥30.5</del>
-            </span>
-            <FooddetailsButton/>
-        </section>
-    </div>
+  <div class="fooddetails">
+    <span class="fooddetails-logo">
+      <img :src="`//fuss10.elemecdn.com/${food.image_path}.jpeg?imageMogr/format/webp/thumbnail/!140x140r/gravity/Center/crop/140x140/`" alt="">
+    </span>
+    <section class="fooddetails-info">
+      <h6 class="info-title">{{food.name}}</h6>
+      <section class="info-detail">
+        <p class="info-introduce">{{food.description}}</p>
+        <p class="info-sales">
+          <span>月销{{food.month_sales}}份</span>
+          <span>好评率{{food.satisfy_rate}}%</span>
+        </p>
+        <div class="icon-activityRow" v-if="food.activity">
+          <span class="label">{{food.activity.benefit_text}}</span>
+          <span>{{food.activity.applicable_quantity_text}}</span>
+        </div>
+      </section>
+      <span class="info-money">
+        <i class="iconfont icon-Money"></i>
+        <span>{{food.specfoods[0].price}}</span>
+        <del v-if="food.specfoods[0].original_price">￥{{food.specfoods[0].original_price}}</del>
+      </span>
+      <FooddetailsButton/>
+    </section>
+  </div>
 </template>
 
 <script>
 import FooddetailsButton from "./FooddetailsButton.vue";
 export default {
+  props: {
+    food: Object
+  },
   components: { FooddetailsButton },
   computed: {}
 };

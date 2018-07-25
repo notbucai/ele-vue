@@ -4,18 +4,19 @@
       <main>
         <div class="menucategory">
           <ul>
-            <li v-for="(item, index) in ['热销','优惠','米饭区、加饭区，需要的的请点','蔬菜区','荤菜区','饮料','炒粉，炒饭','家常小炒类','8元盖浇饭','10元盖浇饭','混沌','12元盖浇饭']" :key="index" :class="{active:isTopID == item}" @click="skip(item)">
-              <span class="menucategory-name">{{item}}</span>
+
+            <li v-for="(item) in shopFoodList" :key="item.id" :class="{active:isTopID == item.id}" @click="skip(item.id)">
+              <span class="menucategory-name">{{item.name}}</span>
             </li>
 
           </ul>
         </div>
         <section ref="scrollUp" class="menuview" @scroll="scrollUp($event)">
 
-          <dl v-for="(item, index) in ['热销','优惠','米饭区、加饭区，需要的的请点','蔬菜区','荤菜区','饮料','炒粉，炒饭','家常小炒类','8元盖浇饭','10元盖浇饭','混沌','12元盖浇饭']" ref="item" :data="item" :key="index">
-            <dt>{{item}}</dt>
-            <dd v-for="(item, index) in 4" :key="index">
-              <Fooddetails/>
+          <dl v-for="(foods) in shopFoodList" ref="item" :data="foods.id" :key="foods.id">
+            <dt>{{foods.name}}</dt>
+            <dd v-for="food in foods.foods" :key="food.item_id">
+              <Fooddetails :food="food" />
             </dd>
           </dl>
 
@@ -39,16 +40,24 @@ export default {
     return {
       scrollTop: 0,
       clientHeight: 600,
-      isTopID: "热销",
+      isTopID: 111,
       skipTime: 0
     };
   },
   mounted() {
     this.getClient();
-    this.$store.dispatch('getShopFoodList',11);
+    this.$store.dispatch("getShopFoodList", 11);
     window.onresize = this.getClient;
+    
   },
-  computed: {},
+  computed: {
+    ...mapState(["shopFoodList"])
+  },
+  watch:{
+    shopFoodList(){
+      this.isTopID = this.shopFoodList[0].id
+    }
+  },
   methods: {
     //获取屏幕高度（减去切换卡高度）
     getClient() {
@@ -61,8 +70,8 @@ export default {
       this.clientHeight = clientHeight - targetHeight;
 
       //
-      console.log(this.tabRefElement.tabRef.offsetHeight);
-      console.log(this.clientHeight);
+      // console.log(this.tabRefElement.tabRef.offsetHeight);
+      // console.log(this.clientHeight);
 
       // alert(this.scrollHeight);
     },
@@ -98,13 +107,13 @@ export default {
     },
     //跳转移动到指定栏目
     skip(value) {
+      // console.log(value,"===");
       let { item } = this.$refs;
       let { scrollUp } = this.$refs;
 
       let node = item.find(element => {
-        return element.getAttribute("data").trim() === value.trim();
+        return element.getAttribute("data").trim() == value;
       });
-      // console.log(value);
 
       if (node) {
         let dist = 20;
@@ -156,7 +165,9 @@ export default {
     box-sizing: initial;
     padding: 16px 8px;
     font-size: 12px;
+    color: #666;
     &.active {
+      color: #333;
       background-color: #fff;
       font-weight: 700;
     }

@@ -26,11 +26,14 @@ export default {
   components: {
     ShopHeader
   },
-  mounted(){
-    this.$store.dispatch('getShopInfo',11);
+  mounted() {
+    this.$store.dispatch("getShopInfo", 11);
   },
-  computed:{
-    tabRefElement(){
+  computed: {
+    ...mapState(["shopInfo"]),
+    tabRefElement() {
+      console.log(this.shopInfo);
+
       return this.$refs;
     }
   }

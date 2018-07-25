@@ -90,7 +90,7 @@ export default {
 
         // console.log(result);
         if (result.code == 200) {
-            let shopEvaluate = result;
+            let shopEvaluate = JSON.parse(result.body || '{}');;
             commit(RECEIVE_SHOP_EVALUATE, { shopEvaluate });
         }
 
@@ -100,7 +100,7 @@ export default {
 
         // console.log(result);
         if (result.code == 200) {
-            let shopFoodList = result;
+            let shopFoodList = JSON.parse(result.body || '{}');;
             commit(RECEIVE_SHOP_FOOD_LIST, { shopFoodList });
         }
         // commit(RECEIVE_SHOP_EVALUATE, { result });
@@ -110,7 +110,7 @@ export default {
 
         // console.log(result);
         if (result.code == 200) {
-            let shopInfo = result;
+            let shopInfo = JSON.parse(result.body || '{}');;
             commit(RECEIVE_SHOP_INFO, { shopInfo });
         }
         // commit(RECEIVE_SHOP_EVALUATE, { result });
@@ -120,7 +120,7 @@ export default {
 
         // console.log(result);
         if (result.code == 200) {
-            let shoppingCart = result;
+            let shoppingCart = JSON.parse(result.body || '{}');
             commit(RECEIVE_SHOPPING_CART, { shoppingCart });
         }
         // commit(RECEIVE_SHOP_EVALUATE, { result });

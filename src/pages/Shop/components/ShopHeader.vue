@@ -1,33 +1,33 @@
 <template>
-    <section class="shopheader">
-        <nav class="header" style="background-image:url(http://fuss10.elemecdn.com/e/5e/219962176b9055bf8d2e58649b396jpeg.jpeg?imageMogr/format/webp/thumbnail/!40p/blur/50x40/)">
-            <router-link to="/" class="iconfont icon-fanhui1"></router-link>
-        </nav>
-        <div class="main" @click="open">
-            <img src="http://fuss10.elemecdn.com/e/5e/219962176b9055bf8d2e58649b396jpeg.jpeg?imageMogr/format/webp/thumbnail/!40p/blur/50x40/" alt="">
-            <div class="main-info">
-                <h2>神仙烧饭</h2>
-                <div class="info">
-                    <span>评价4.4</span>
-                    <span>月销690</span>
-                    <span>商家配送约68分钟</span>
-                </div>
-                <p>天气炎热，为了能尽快把餐送到亲的手上，请各位亲尽量提前预订哦。谢谢！</p>
-            </div>
+  <section class="shopheader" v-if="shopInfo">
+    <nav class="header" style="background-image:url(http://fuss10.elemecdn.com/e/5e/219962176b9055bf8d2e58649b396jpeg.jpeg?imageMogr/format/webp/thumbnail/!40p/blur/50x40/)">
+      <router-link to="/" class="iconfont icon-fanhui1"></router-link>
+    </nav>
+    <div class="main" @click="open">
+      <img src="http://fuss10.elemecdn.com/e/5e/219962176b9055bf8d2e58649b396jpeg.jpeg?imageMogr/format/webp/thumbnail/!40p/blur/50x40/" alt="">
+      <div class="main-info">
+        <h2>{{shopInfo.name}}</h2>
+        <div class="info">
+          <span>评价 {{shopInfo.rating}}</span>
+          <span>月销{{shopInfo.recent_order_num}}</span>
+          <span>商家配送约{{shopInfo.order_lead_time}}分钟</span>
         </div>
-        <div class="discounts">
-            <div class="info">
-                <span class="icon" style="background-color: rgb(240, 115, 115);">满减</span>
-                <span class="title">满100减1</span>
-            </div>
-            <div class="count">
-                18个优惠
-            </div>
-        </div>
-        <transition name="info">
-            <HeaderInfo v-if="isShow" :close="close" />
-        </transition>
-    </section>
+        <p>{{shopInfo.promotion_info}}</p>
+      </div>
+    </div>
+    <div class="discounts">
+      <div class="info">
+        <span class="icon" :style="{backgroundColor: `#${shopInfo.activities[0].icon_color}`}">{{shopInfo.activities[0].icon_name}}</span>
+        <span class="title">{{shopInfo.activities[0].description}}</span>
+      </div>
+      <div class="count">
+        {{shopInfo.activities.length}}个优惠
+      </div>
+    </div>
+    <transition name="info">
+      <HeaderInfo v-if="isShow" :close="close" />
+    </transition>
+  </section>
 </template>
 
 <script>
@@ -41,6 +41,9 @@ export default {
     return {
       isShow: false
     };
+  },
+  computed: {
+    ...mapState(['shopInfo'])
   },
   methods: {
     open() {
@@ -152,8 +155,9 @@ export default {
   }
 }
 
-.info-enter-active, .info-leave-active {
-  transition: opacity .5s;
+.info-enter-active,
+.info-leave-active {
+  transition: opacity 0.5s;
 }
 .info-enter, .info-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;

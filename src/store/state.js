@@ -13,9 +13,17 @@ export default {
     userData: {},
 
     //商家食物列表
-    shopFoodList: {},
+    shopFoodList: [
+        { id: 123 }
+    ],
     //商家信息/资料
-    shopInfo: {},
+    shopInfo: {
+        activities: [{
+            icon_color: "f07373",
+            icon_name: "满减",
+            name: "自营销复杂满减活动"
+        }]
+    },
     //商家评价列表
     shopEvaluate: {},
     //购物车
