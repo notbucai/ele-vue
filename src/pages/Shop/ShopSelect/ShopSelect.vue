@@ -2,6 +2,7 @@
   <section class="shopselect" :style="{height:`${clientHeight}px`}">
     <div class="container">
       <main>
+
         <div class="menucategory">
           <ul>
 
@@ -11,7 +12,9 @@
 
           </ul>
         </div>
-        <section ref="scrollUp" class="menuview" @scroll="scrollUp($event)">
+
+
+        <section ref="scrollUp" class="menuview"  v-if="isShow" @scroll="scrollUp($event)">
 
           <dl v-for="(foods) in shopFoodList" ref="item" :data="foods.id" :key="foods.id">
             <dt>{{foods.name}}</dt>
@@ -21,6 +24,8 @@
           </dl>
 
         </section>
+        <FoodMenuSkeleton v-else/>
+
       </main>
     </div>
   </section>
@@ -29,33 +34,35 @@
 <script>
 import { mapState } from "vuex";
 import Fooddetails from "./components/Fooddetails.vue";
+import FoodMenuSkeleton from "./prerender/FoodMenu.skeleton.vue";
 export default {
   props: {
     tabRefElement: Object
   },
   components: {
-    Fooddetails
+    Fooddetails,FoodMenuSkeleton
   },
   data() {
     return {
       scrollTop: 0,
       clientHeight: 600,
       isTopID: 111,
-      skipTime: 0
+      skipTime: 0,
+      isShow: false
     };
   },
   mounted() {
     this.getClient();
     this.$store.dispatch("getShopFoodList", 11);
     window.onresize = this.getClient;
-    
   },
   computed: {
     ...mapState(["shopFoodList"])
   },
-  watch:{
-    shopFoodList(){
-      this.isTopID = this.shopFoodList[0].id
+  watch: {
+    shopFoodList() {
+      this.isTopID = this.shopFoodList[0].id;
+      this.isShow = true;
     }
   },
   methods: {

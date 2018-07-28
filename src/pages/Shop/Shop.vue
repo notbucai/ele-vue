@@ -1,7 +1,8 @@
 <template>
   <section class="shop">
-
-    <ShopHeader/>
+    <ShopHeader v-if="isHeaderShow"/>
+    <ShopHeaderSkeleton v-else/>
+    
 
     <div class="tab" ref="tabRef">
       <div class="slelect" @click="$router.replace(`/shop/slelect`)">
@@ -22,9 +23,16 @@
 <script>
 import { mapState } from "vuex";
 import ShopHeader from "./components/ShopHeader.vue";
+import ShopHeaderSkeleton from "./prerender/ShopHeader.skeleton.vue";
 export default {
+  data(){
+    return {
+      isHeaderShow :false,
+    };
+  },
   components: {
-    ShopHeader
+    ShopHeader,
+    ShopHeaderSkeleton
   },
   mounted() {
     this.$store.dispatch("getShopInfo", 11);
@@ -35,6 +43,11 @@ export default {
       console.log(this.shopInfo);
 
       return this.$refs;
+    }
+  },
+  watch:{
+    shopInfo(){
+      this.isHeaderShow = true;
     }
   }
 };

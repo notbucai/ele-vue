@@ -1,10 +1,10 @@
 <template>
   <section class="shopheader" v-if="shopInfo">
-    <nav class="header" style="background-image:url(http://fuss10.elemecdn.com/e/5e/219962176b9055bf8d2e58649b396jpeg.jpeg?imageMogr/format/webp/thumbnail/!40p/blur/50x40/)">
+    <nav class="header" :style="{backgroundImage:shopInfo.image_path&&`url(http://fuss10.elemecdn.com/${shopInfo.image_path}.jpeg?imageMogr/format/webp/thumbnail/!40p/blur/50x40/)`}">
       <router-link to="/" class="iconfont icon-fanhui1"></router-link>
     </nav>
     <div class="main" @click="open">
-      <img src="http://fuss10.elemecdn.com/e/5e/219962176b9055bf8d2e58649b396jpeg.jpeg?imageMogr/format/webp/thumbnail/!40p/blur/50x40/" alt="">
+      <img :src="shopInfo.image_path&&`http://fuss10.elemecdn.com/${shopInfo.image_path}.jpeg?imageMogr/format/webp/thumbnail/!40p/blur/50x40/`" alt="">
       <div class="main-info">
         <h2>{{shopInfo.name}}</h2>
         <div class="info">
@@ -43,7 +43,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(['shopInfo'])
+    ...mapState(["shopInfo"])
   },
   methods: {
     open() {
@@ -62,7 +62,7 @@ export default {
 }
 
 .header {
-  height: 16vw;
+  height: 66px;
   background: no-repeat;
   background-size: cover;
   position: relative;
@@ -97,6 +97,8 @@ export default {
   z-index: 2;
   img {
     margin-top: -40px;
+    width: 80px;
+    height: 80px;
   }
   .main-info {
     h2 {
