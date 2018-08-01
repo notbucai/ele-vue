@@ -21,7 +21,7 @@
         <span>{{food.specfoods[0].price}}</span>
         <del v-if="food.specfoods[0].original_price">￥{{food.specfoods[0].original_price}}</del>
       </span>
-      <FooddetailsButton/>
+      <FooddetailsButton :id="food.specfoods[0].sku_id" class="extra"/>
     </section>
   </div>
 </template>
@@ -101,6 +101,11 @@ export default {
         font-size: 12px;
         color: #999;
       }
+    }
+
+    .extra {
+      bottom: 0;
+      right: 10px;
     }
   }
 }

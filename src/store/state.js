@@ -27,5 +27,36 @@ export default {
     //商家评价列表
     shopEvaluate: {},
     //购物车
-    shoppingCart: {},
+    shoppingCart: {
+        shop_promotion_cell: [{
+            add_on_pop_up_tip: "出错"
+        }],
+        cart: {
+            total: 100,
+            original_total: 500,
+            agent_fee_tip: "出错",
+            group: [
+                [
+                    {
+                        activities: [
+                            {
+                                max_quantity: 1,
+                                price: 1.1,
+                                quantity: 1,
+
+                            }
+                        ],
+                        quantity: 0,
+                        name: "菜名",
+                        price: 0,
+                        id: 1,
+                        total_price: 1,
+                    }
+                ]
+            ]
+        },
+        checkout_button_v2: {
+            text: "错误"
+        }
+    },
 }

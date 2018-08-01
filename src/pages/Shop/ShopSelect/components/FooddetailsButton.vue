@@ -1,10 +1,12 @@
 <template>
     <div class="fooddetails-button">
         <span class="cartBtn">
-            <a href="" class="minus">
-                <i class="iconfont icon-minus"></i>
-            </a>
-            <span class="count">1</span>
+            <span v-if="cartFood">
+              <a href="" class="minus">
+                  <i class="iconfont icon-minus"></i>
+              </a>
+              <span class="count">{{cartFood.quantity}}</span>
+            </span>
             <a href="" class="add">
                 <i class="iconfont icon-add"></i>
             </a>
@@ -13,9 +15,18 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
+  props: {
+    id: Number
+  },
   components: {},
-  computed: {}
+  computed: {
+    ...mapState(["shoppingCart"]),
+    cartFood() {
+      return this.shoppingCart.cart.group[0].find(val => val.sku_id === this.id);
+    }
+  }
 };
 </script>
 
@@ -23,8 +34,6 @@ export default {
 <style lang="scss" scoped>
 .fooddetails-button {
   position: absolute;
-  bottom: 0;
-  right: 6px;
   .cartBtn {
     a {
       width: 20px;
@@ -57,11 +66,15 @@ export default {
         background-color: #2396ff;
       }
     }
+    .no{
+      
+    }
     .count {
-      color: #666;
+      color: #444;
       float: left;
       font-size: 14px;
-      padding: 0 6px;
+      width: 26px;
+      text-align: center;
       line-height: 24px;
     }
   }

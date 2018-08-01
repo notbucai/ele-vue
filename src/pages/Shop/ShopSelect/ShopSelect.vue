@@ -19,12 +19,14 @@
           <dl v-for="(foods) in shopFoodList" ref="item" :data="foods.id" :key="foods.id">
             <dt>{{foods.name}}</dt>
             <dd v-for="food in foods.foods" :key="food.item_id">
-              <Fooddetails :food="food" />
+              <Fooddetails :food="food"  />
             </dd>
           </dl>
 
         </section>
         <FoodMenuSkeleton v-else/>
+
+        <ShoppingCart/>
 
       </main>
     </div>
@@ -34,13 +36,16 @@
 <script>
 import { mapState } from "vuex";
 import Fooddetails from "./components/Fooddetails.vue";
+import ShoppingCart from "./components/ShoppingCart.vue";
 import FoodMenuSkeleton from "./prerender/FoodMenu.skeleton.vue";
 export default {
   props: {
     tabRefElement: Object
   },
   components: {
-    Fooddetails,FoodMenuSkeleton
+    Fooddetails,
+    FoodMenuSkeleton,
+    ShoppingCart
   },
   data() {
     return {
@@ -54,6 +59,7 @@ export default {
   mounted() {
     this.getClient();
     this.$store.dispatch("getShopFoodList", 11);
+    this.$store.dispatch("getShoppingCart", 11);
     window.onresize = this.getClient;
   },
   computed: {

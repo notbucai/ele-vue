@@ -37,7 +37,7 @@ export const getShopEvaluate = (id) => ajax({
     url: `/api/shopevaluate/${id}`,
 });
 
-//获取商家评价列表
+//获取购物车
 export const getShoppingCart = (id) => ajax({
     url: `/api/shoppingCart/${id}`,
 });

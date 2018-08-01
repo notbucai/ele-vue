@@ -1,5 +1,6 @@
 <template>
   <section class="shop">
+    
     <ShopHeader v-if="isHeaderShow"/>
     <ShopHeaderSkeleton v-else/>
     
@@ -25,9 +26,9 @@ import { mapState } from "vuex";
 import ShopHeader from "./components/ShopHeader.vue";
 import ShopHeaderSkeleton from "./prerender/ShopHeader.skeleton.vue";
 export default {
-  data(){
+  data() {
     return {
-      isHeaderShow :false,
+      isHeaderShow: false
     };
   },
   components: {
@@ -45,8 +46,8 @@ export default {
       return this.$refs;
     }
   },
-  watch:{
-    shopInfo(){
+  watch: {
+    shopInfo() {
       this.isHeaderShow = true;
     }
   }
