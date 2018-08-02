@@ -9,12 +9,20 @@
             <div class="info">
               <span class="name">{{item.name}}</span>
               <span class="money">
-                  <del>￥{{item.total_price}}</del>
+                  <del v-if="item.activities.length">￥{{item.total_price}}</del>
                   ￥{{item.total_price + calculation(item.activities)}}
               </span>
             </div>
             
             <FooddetailsButton :id="item.sku_id" class="extra"/>
+        </li>
+        <li v-for="item in shoppingCart.cart.extra" :key="item.id">
+          <div class="info">
+              <span class="name">{{item.name}}</span>
+              <span class="money">
+                  {{item.price}}
+              </span>
+            </div>
         </li>
     </ul>
 </div>
@@ -81,8 +89,8 @@ export default {
     height: 280px;
     > li {
       position: relative;
-      padding: 12px 10px;
-      border-bottom: 1px solid #f8f8f8;
+      padding: 16px 10px;
+      border-bottom: 1px solid #f9f9f9;
       .info {
         display: flex;
         width: 264px;

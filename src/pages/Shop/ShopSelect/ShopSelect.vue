@@ -1,5 +1,5 @@
 <template>
-  <section class="shopselect" :style="{height:`${clientHeight}px`}">
+  <section class="shopselect" :style="{height:`${scrollHeight}px`}">
     <div class="container">
       <main>
 
@@ -8,6 +8,7 @@
 
             <li v-for="(item) in shopFoodList" :key="item.id" :class="{active:isTopID == item.id}" @click="skip(item.id)">
               <span class="menucategory-name">{{item.name}}</span>
+              <span class="menucategory-count" v-if="getCartGroup(item.id)">{{getCartGroup(item.id)}}</span>
             </li>
 
           </ul>
@@ -34,13 +35,13 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 import Fooddetails from "./components/Fooddetails.vue";
 import ShoppingCart from "./components/ShoppingCart.vue";
 import FoodMenuSkeleton from "./prerender/FoodMenu.skeleton.vue";
 export default {
   props: {
-    tabRefElement: Object
+    scrollHeight: Number
   },
   components: {
     Fooddetails,
@@ -57,13 +58,11 @@ export default {
     };
   },
   mounted() {
-    this.getClient();
     this.$store.dispatch("getShopFoodList", 11);
     this.$store.dispatch("getShoppingCart", 11);
-    window.onresize = this.getClient;
   },
   computed: {
-    ...mapState(["shopFoodList"])
+    ...mapState(["shopFoodList", "shoppingCart"])
   },
   watch: {
     shopFoodList() {
@@ -72,22 +71,20 @@ export default {
     }
   },
   methods: {
-    //获取屏幕高度（减去切换卡高度）
-    getClient() {
-      // 为方便直接解析document的属性
-      let { body, documentElement } = document;
-      // 获取屏幕高度 同时为了解决兼容性问题（屏幕分辨率和屏幕宽度不一致。。。）
-      let clientHeight = documentElement.clientHeight;
-      let targetHeight = this.tabRefElement.tabRef.offsetHeight;
+    //获取分类分组
+    getCartGroup(groupId) {
+      let num = 0;
+      let group = this.shoppingCart.cart.group[0].filter(
+        val => val.group_id == groupId
+      );
+      // console.log(group);
 
-      this.clientHeight = clientHeight - targetHeight;
-
-      //
-      // console.log(this.tabRefElement.tabRef.offsetHeight);
-      // console.log(this.clientHeight);
-
-      // alert(this.scrollHeight);
+      group.forEach(element => {
+        num += element.quantity;
+      });
+      return num;
     },
+
     //子scroll向下拉时改变html的scroll
     scrollUp(event) {
       let { scrollTop } = event.target;
@@ -165,6 +162,8 @@ export default {
   main {
     display: flex;
     height: 100%;
+    box-sizing: border-box;
+    padding-bottom: 60px;
   }
 }
 .menucategory {
@@ -175,6 +174,7 @@ export default {
   overflow-y: auto;
   position: relative;
   ul > li {
+    position: relative;
     box-sizing: initial;
     padding: 16px 8px;
     font-size: 12px;
@@ -183,6 +183,19 @@ export default {
       color: #333;
       background-color: #fff;
       font-weight: 700;
+    }
+    .menucategory-count {
+      position: absolute;
+      top: 0;
+      right: 0;
+      display: inline-block;
+      transform: scale(0.68);
+      padding: 4px 6px;
+      background: linear-gradient(#ff4312, #f49000);
+      border-radius: 50%;
+      text-align: center;
+      color: #fff;
+      font-size: 12px;
     }
   }
 }

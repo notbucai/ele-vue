@@ -16,7 +16,7 @@
         <span :class="{'yes':$route.path == '/shop/info'}">商家</span>
       </div>
     </div>
-    <router-view :tabRefElement="tabRefElement"></router-view>
+    <router-view :scrollHeight="scrollHeight"></router-view>
 
   </section>
 </template>
@@ -28,7 +28,8 @@ import ShopHeaderSkeleton from "./prerender/ShopHeader.skeleton.vue";
 export default {
   data() {
     return {
-      isHeaderShow: false
+      isHeaderShow: false,
+      scrollHeight: 100
     };
   },
   components: {
@@ -37,18 +38,31 @@ export default {
   },
   mounted() {
     this.$store.dispatch("getShopInfo", 11);
+    this.getScrollHeight();
+    window.addEventListener("resize", this.getScrollHeight);
   },
   computed: {
-    ...mapState(["shopInfo"]),
-    tabRefElement() {
-      console.log(this.shopInfo);
-
-      return this.$refs;
-    }
+    ...mapState(["shopInfo"])
   },
   watch: {
     shopInfo() {
       this.isHeaderShow = true;
+    }
+  },
+    //获取屏幕高度（减去切换卡高度）
+  methods: {
+    getScrollHeight() {
+
+      let tabHeight = this.$refs["tabRef"].offsetHeight;
+
+      // 为方便直接解析document的属性
+      let { body, documentElement } = document;
+      // 获取屏幕高度 同时为了解决兼容性问题（屏幕分辨率和屏幕宽度不一致。。。）
+      let clientHeight = documentElement.clientHeight;
+      console.log("=>",tabHeight);
+      
+      this.scrollHeight = clientHeight - tabHeight;
+
     }
   }
 };

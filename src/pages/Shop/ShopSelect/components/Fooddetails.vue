@@ -105,7 +105,7 @@ export default {
 
     .extra {
       bottom: 0;
-      right: 10px;
+      right: 2px;
     }
   }
 }

@@ -15,17 +15,19 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState,mapActions } from "vuex";
 export default {
   props: {
-    id: Number
+    id: String
   },
   components: {},
   computed: {
     ...mapState(["shoppingCart"]),
     cartFood() {
-      return this.shoppingCart.cart.group[0].find(val => val.sku_id === this.id);
+      return this.shoppingCart.cart.group[0].find(val => val.sku_id == this.id);
     }
+  },
+  methods:{
   }
 };
 </script>

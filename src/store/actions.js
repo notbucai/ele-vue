@@ -124,5 +124,6 @@ export default {
             commit(RECEIVE_SHOPPING_CART, { shoppingCart });
         }
         // commit(RECEIVE_SHOP_EVALUATE, { result });
-    }
+    },
+    
 }

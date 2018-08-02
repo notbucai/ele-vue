@@ -35,6 +35,16 @@ export default {
             total: 100,
             original_total: 500,
             agent_fee_tip: "出错",
+            extra: [
+
+                {
+                    name: "出错",
+                    id: 0,
+                    price: 0
+                }
+
+
+            ],
             group: [
                 [
                     {
@@ -49,8 +59,10 @@ export default {
                         quantity: 0,
                         name: "菜名",
                         price: 0,
-                        id: 1,
+                        id: '1',
                         total_price: 1,
+                        sku_id: '1',
+                        group_id: '1',
                     }
                 ]
             ]
