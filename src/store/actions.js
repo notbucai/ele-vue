@@ -8,6 +8,7 @@ import {
     RECEIVE_SHOP_FOOD_LIST,
     RECEIVE_SHOP_INFO,
     RECEIVE_SHOPPING_CART,
+    RECEIVE_SEARCH,
 } from "./mutation-type";
 
 import {
@@ -19,6 +20,7 @@ import {
     getShopFoodList,
     getShopInfo,
     getShoppingCart,
+    getSearch,
 } from "../api/";
 export default {
     async getAddress({ commit, state }) {
@@ -125,5 +127,16 @@ export default {
         }
         // commit(RECEIVE_SHOP_EVALUATE, { result });
     },
-    
+
+    async getSearch({ commit }, word) {
+        let result = await getSearch(word);
+
+        console.log(result);
+        if (result.code == 200) {
+            let search = result.remind;
+            // let search = JSON.parse(result.remind || '[]');
+            commit(RECEIVE_SEARCH, { search });
+        }
+        // commit(RECEIVE_SHOP_EVALUATE, { result });
+    },
 }

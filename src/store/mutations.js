@@ -7,7 +7,8 @@ import {
     RECEIVE_SHOP_EVALUATE,
     RECEIVE_SHOP_FOOD_LIST,
     RECEIVE_SHOP_INFO,
-    RECEIVE_SHOPPING_CART
+    RECEIVE_SHOPPING_CART,
+    RECEIVE_SEARCH,
 } from "./mutation-type";
 
 export default {
@@ -46,4 +47,7 @@ export default {
 
         state.shoppingCart = shoppingCart;
     },
+    [RECEIVE_SEARCH](state, { search }) {
+        state.search = search;
+    }
 }

@@ -43,6 +43,12 @@ export const getShoppingCart = (id) => ajax({
 });
 //购物车
 
+//搜索联想数据
+export const getSearch = (data) => ajax({
+    url: `/api/search`,
+    data,
+    type:"POST"
+});
 
 /**
  * 

@@ -71,4 +71,11 @@ export default {
             text: "错误"
         }
     },
+    search: [
+        // {
+        //     name: "test",    //名字
+        //     img_path: "",    //图片路径
+        //     evaluate: 0.1    //评分
+        // }
+    ],
 }

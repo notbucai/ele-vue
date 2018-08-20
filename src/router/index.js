@@ -15,7 +15,7 @@ import ShopEvaluate from '../pages/Shop/ShopEvaluate/ShopEvaluate.vue'
 
 export default new VueRouter({
     routes: [
-        
+
         {
             path: '/',
             redirect: '/msite'
@@ -59,7 +59,7 @@ export default new VueRouter({
         {
             path: '/shop',
             component: Shop,
-            children:[
+            children: [
                 {
                     path: '/shop/slelect',
                     component: ShopSelect,
@@ -79,5 +79,14 @@ export default new VueRouter({
             ],
         }
 
-    ]
+    ],
+    scrollBehavior(to, from, savedPosition) {
+        // console.log("===+++",to,from,savedPosition );
+        // if (to.matched[0].path == '/shop') {
+        //     return { x: 0, y: 0 };
+        // }
+
+
+        // return 期望滚动到哪个的位置
+    }
 });

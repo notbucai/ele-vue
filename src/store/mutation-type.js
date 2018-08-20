@@ -18,7 +18,10 @@ export const RECEIVE_SHOP_INFO = "receive_shop_info"
 //商家评价列表
 export const RECEIVE_SHOP_EVALUATE = "receive_shop_evaluate"
 //购物车
-export const RECEIVE_SHOPPING_CART = "RECEIVE_SHOPPING_CART"
+export const RECEIVE_SHOPPING_CART = "receive_shopping_cart"
+
+// 搜索联想
+export const RECEIVE_SEARCH = "receive_search"
 
 /**
  *     //商家食物列表
